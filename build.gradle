@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        // 只从 Fabric 官方仓库获取 fabric-loom 插件
         maven {
             name = "Fabric"
             url = "https://maven.fabricmc.net/"
@@ -19,12 +18,6 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-    // 优先使用 BMCLAPI 镜像（包含 Minecraft 核心库、Fabric API 等）
-    maven {
-        name = "BMCLAPI"
-        url = "https://bmclapi2.bangbang93.com/maven"
-    }
-    // Fabric 官方仓库作为备用
     maven {
         name = "Fabric"
         url = "https://maven.fabricmc.net/"
@@ -40,12 +33,12 @@ loom {
             sourceSet sourceSets.client
         }
     }
-    // 让 Loom 使用我们定义的 repositories
-    // （默认会自动使用上述 repositories）
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    // 添加 mappings，使用 Yarn 映射（版本需与 Minecraft 匹配）
+    mappings "net.fabricmc:yarn:${project.yarn_version}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 }
