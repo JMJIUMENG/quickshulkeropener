@@ -33,11 +33,11 @@ loom {
             sourceSet sourceSets.client
         }
     }
-    useOfficialMojangMappings()
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:intermediary:${project.minecraft_version}"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 }
