@@ -1,7 +1,18 @@
-plugins {
-    id 'fabric-loom' version '1.17.9'
-    id 'maven-publish'
+buildscript {
+    repositories {
+        maven {
+            name = "Fabric"
+            url = "https://maven.fabricmc.net/"
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath "net.fabricmc:fabric-loom:1.17.9"
+    }
 }
+
+apply plugin: 'fabric-loom'
+apply plugin: 'maven-publish'
 
 version = project.mod_version
 group = project.maven_group
@@ -22,7 +33,8 @@ loom {
             sourceSet sourceSets.client
         }
     }
-    mappings loom.officialMojangMappings()
+    // 关键：直接使用 Minecraft 客户端 JAR 中的映射
+    mappings minecraftClient()
 }
 
 dependencies {
